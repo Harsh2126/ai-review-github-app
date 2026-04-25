@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Code Reviewer — Dashboard</title>
+  <link rel="stylesheet" href="/dashboard/style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🤖 AI Code Reviewer</div>
+    <a id="install-btn" href="#" class="btn-install" target="_blank">Install on GitHub →</a>
+  </header>
+
+  <main>
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value" id="total-reviews">—</span>
+        <span class="stat-label">PRs Reviewed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="active-installs">—</span>
+        <span class="stat-label">Active Installations</span>
+      </div>
+    </section>
+
+    <section class="reviews-section">
+      <h2>Recent Reviews</h2>
+      <div id="reviews-list" class="reviews-list">
+        <p class="loading">Loading reviews…</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/dashboard/app.js"></script>
+</body>
+</html>

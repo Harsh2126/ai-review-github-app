@@ -1,0 +1,8 @@
+flask
+groq
+PyGithub
+python-dotenv
+cryptography
+PyJWT
+requests
+flask-cors
