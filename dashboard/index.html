@@ -10,7 +10,7 @@
 
 <body>
 
-  <!-- ===== HEADER: Logo + Install Button ===== -->
+  <!-- ===== HEADER ===== -->
   <header>
     <div class="logo">🤖 AI Code Reviewer</div>
     <a id="install-btn" href="#" class="btn-install" target="_blank">
@@ -20,16 +20,20 @@
 
   <main>
 
-    <!-- ===== STATS SECTION: Total PRs + Active Installations ===== -->
+    <!-- ===== HERO: App description ===== -->
+    <section class="hero">
+      <h1>AI-Powered Code Reviews</h1>
+      <p>Automatically reviews every Pull Request using <strong>Groq's llama-3.3-70b-versatile</strong> model and posts a structured comment with bugs, security issues, performance tips, and a score.</p>
+    </section>
+
+    <!-- ===== STATS: Total PRs + Active Installations ===== -->
     <section class="stats-grid">
 
-      <!-- Total PRs Reviewed -->
       <div class="stat-card">
         <span class="stat-value" id="total-reviews">—</span>
         <span class="stat-label">PRs Reviewed</span>
       </div>
 
-      <!-- Active GitHub App Installations -->
       <div class="stat-card">
         <span class="stat-value" id="active-installs">—</span>
         <span class="stat-label">Active Installations</span>
@@ -37,20 +41,74 @@
 
     </section>
 
-    <!-- ===== REVIEWS SECTION: Recent PR Reviews List ===== -->
-    <section class="reviews-section">
-      <h2>Recent Reviews</h2>
+    <!-- ===== WHY INSTALL ===== -->
+    <section class="section">
+      <h2>Why Install?</h2>
+      <div class="features-grid">
 
-      <!-- Reviews are dynamically injected here by js/render.js -->
-      <div id="reviews-list" class="reviews-list">
-        <p class="loading">Loading reviews…</p>
+        <div class="feature-card">
+          <span class="feature-icon">🐛</span>
+          <h3>Bug Detection</h3>
+          <p>Catches logical errors and bugs before they reach production.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🔒</span>
+          <h3>Security Scan</h3>
+          <p>Identifies security vulnerabilities like SQL injection, XSS, and more.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">⚡</span>
+          <h3>Performance Tips</h3>
+          <p>Suggests optimizations to make your code faster and efficient.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">✨</span>
+          <h3>Code Quality</h3>
+          <p>Enforces best practices and clean code standards automatically.</p>
+        </div>
+
       </div>
+    </section>
 
+    <!-- ===== ABOUT ===== -->
+    <section class="section">
+      <h2>About</h2>
+      <div class="about-card">
+        <p>AI Code Reviewer is a GitHub App that listens to Pull Request events and automatically posts a detailed review comment powered by <strong>Groq AI</strong>.</p>
+        <br />
+        <p>Every review includes a <strong>score out of 10</strong>, severity level, list of issues with fixes, good practices observed, and critical items that must be fixed before merging.</p>
+        <br />
+        <div class="tech-stack">
+          <span class="tech-badge">Node.js</span>
+          <span class="tech-badge">Express</span>
+          <span class="tech-badge">Groq AI</span>
+          <span class="tech-badge">MongoDB</span>
+          <span class="tech-badge">GitHub Apps</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="section">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><p>Install the app on your GitHub repository</p></div>
+        <div class="step"><span class="step-num">2</span><p>Open a Pull Request on any branch</p></div>
+        <div class="step"><span class="step-num">3</span><p>AI automatically reviews the code diff</p></div>
+        <div class="step"><span class="step-num">4</span><p>Review comment is posted on your PR instantly</p></div>
+      </div>
     </section>
 
   </main>
 
-  <!-- ===== SCRIPT: Entry point (ES module) ===== -->
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>Powered by <strong>Groq AI</strong> · Built with Node.js + MongoDB</p>
+  </footer>
+
   <script type="module" src="/dashboard/js/main.js"></script>
 
 </body>
