@@ -1,6 +1,5 @@
 .env
 *.db
-__pycache__/
+node_modules/
 *.pyc
 *.pyo
-src/__pycache__/
