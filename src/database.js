@@ -1,36 +1,12 @@
 const mongoose = require("mongoose");
+const Installation = require("./models/Installation");
+const Review = require("./models/Review");
+const Usage = require("./models/Usage");
 
 async function initDb() {
   await mongoose.connect(process.env.MONGODB_URI);
   console.info("MongoDB connected");
 }
-
-const installationSchema = new mongoose.Schema({
-  github_username: String,
-  installation_id: { type: Number, unique: true },
-  created_at: String,
-  is_active: { type: Number, default: 1 },
-});
-
-const reviewSchema = new mongoose.Schema({
-  repo_name: String,
-  pr_number: Number,
-  review_text: String,
-  score: String,
-  severity: String,
-  created_at: String,
-});
-
-const usageSchema = new mongoose.Schema({
-  installation_id: Number,
-  month: String,
-  pr_count: { type: Number, default: 0 },
-});
-usageSchema.index({ installation_id: 1, month: 1 }, { unique: true });
-
-const Installation = mongoose.model("Installation", installationSchema);
-const Review = mongoose.model("Review", reviewSchema);
-const Usage = mongoose.model("Usage", usageSchema);
 
 async function saveInstallation(githubUsername, installationId) {
   await Installation.findOneAndUpdate(
