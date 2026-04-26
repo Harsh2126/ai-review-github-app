@@ -1,6 +1,56 @@
 # 🤖 AI Code Reviewer — GitHub App
 
-Automatically reviews every Pull Request using **Groq's llama3-70b-8192** model and posts a structured markdown comment with bugs, security issues, performance tips, and a score.
+Automatically reviews every Pull Request using **Groq's llama-3.3-70b-versatile** model and posts a structured markdown comment with bugs, security issues, performance tips, and a score.
+
+---
+
+## 🛠 Tech Stack
+
+- **Backend**: Node.js + Express
+- **AI**: Groq API (`llama-3.3-70b-versatile`)
+- **GitHub Integration**: Octokit + GitHub Apps JWT auth
+- **Database**: MongoDB Atlas (Mongoose)
+- **Deployment**: Render
+
+---
+
+## 📁 Project Structure
+
+```
+ai-review-github-app/
+├── src/
+│   ├── config/
+│   │   └── db.js                  # MongoDB connection
+│   ├── controllers/
+│   │   ├── webhookController.js   # Webhook event logic (PR + installation)
+│   │   └── dashboardController.js # Stats API + dashboard page
+│   ├── middleware/
+│   │   └── verifySignature.js     # GitHub webhook signature verification
+│   ├── models/
+│   │   ├── Installation.js        # GitHub App installation schema
+│   │   ├── Review.js              # PR review schema
+│   │   └── Usage.js               # Monthly usage tracking schema
+│   ├── routes/
+│   │   ├── webhook.js             # POST /webhook
+│   │   ├── dashboard.js           # GET / /dashboard /api/stats
+│   │   └── health.js              # GET /health
+│   ├── services/
+│   │   ├── githubService.js       # GitHub API (JWT, diff, comment)
+│   │   └── reviewerService.js     # Groq AI review + comment formatter
+│   └── app.js                     # Express server entry point
+├── dashboard/
+│   ├── js/
+│   │   ├── config.js              # Constants (APP_NAME, API URL)
+│   │   ├── api.js                 # Fetch calls to backend
+│   │   ├── utils.js               # escHtml, formatDate helpers
+│   │   ├── render.js              # DOM rendering functions
+│   │   └── main.js                # Entry point, init + auto-refresh
+│   ├── index.html                 # Dashboard UI
+│   └── style.css                  # Dark theme styles
+├── .env.example
+├── package.json
+└── README.md
+```
 
 ---
 
@@ -18,9 +68,9 @@ Automatically reviews every Pull Request using **Groq's llama3-70b-8192** model 
 1. Go to **GitHub → Settings → Developer settings → GitHub Apps → New GitHub App**
 2. Fill in:
    - **App name**: `my-ai-code-reviewer` (must be unique)
-   - **Homepage URL**: `https://your-railway-url.railway.app`
-   - **Webhook URL**: `https://your-railway-url.railway.app/webhook`
-   - **Webhook secret**: generate a random string (e.g. `openssl rand -hex 32`)
+   - **Homepage URL**: `https://your-render-url.onrender.com`
+   - **Webhook URL**: `https://your-render-url.onrender.com/webhook`
+   - **Webhook secret**: generate a random string
 3. **Permissions** (Repository):
    - Pull requests: **Read & Write**
    - Contents: **Read**
@@ -31,32 +81,50 @@ Automatically reviews every Pull Request using **Groq's llama3-70b-8192** model 
 
 ---
 
-### 3. Deploy to Railway
+### 3. Setup MongoDB Atlas
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app)
+1. Go to [mongodb.com/atlas](https://www.mongodb.com/atlas)
+2. Create a free cluster
+3. **Database Access** → Add a user with password
+4. **Network Access** → Allow access from anywhere (`0.0.0.0/0`)
+5. **Connect** → Copy the connection string:
+```
+mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/ai-reviewer
+```
+
+---
+
+### 4. Deploy to Render
 
 1. Push this repo to GitHub
-2. Go to [railway.app](https://railway.app) → **New Project → Deploy from GitHub repo**
-3. Select this repository
-4. Add the following **Environment Variables** in Railway:
+2. Go to [render.com](https://render.com) → **New → Web Service**
+3. Connect your GitHub repo
+4. Set:
+   - **Build Command**: `npm install`
+   - **Start Command**: `node src/app.js`
+5. Add **Environment Variables**:
 
 | Variable | Value |
 |---|---|
 | `GROQ_API_KEY` | `gsk_xxxxx` |
 | `GITHUB_APP_ID` | `123456` |
-| `GITHUB_APP_PRIVATE_KEY` | Full contents of the `.pem` file (newlines as `\n`) |
-| `GITHUB_WEBHOOK_SECRET` | Your webhook secret string |
+| `GITHUB_APP_PRIVATE_KEY` | Full `.pem` contents (newlines as `\n`) |
+| `GITHUB_WEBHOOK_SECRET` | Your webhook secret |
 | `GITHUB_CLIENT_ID` | From GitHub App settings |
 | `GITHUB_CLIENT_SECRET` | From GitHub App settings |
+| `MONGODB_URI` | Your Atlas connection string |
 | `PORT` | `5000` |
 
-> **Tip for private key**: Run `awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' private-key.pem` to get the single-line format.
+> **Tip for private key**: Run this to get single-line format:
+> ```bash
+> python -c "print(open('private-key.pem').read().replace('\n', '\\n'))"
+> ```
 
-5. Railway will auto-deploy. Copy the public URL and update your GitHub App's **Webhook URL**.
+6. Deploy — copy the public URL and update your GitHub App's **Webhook URL**
 
 ---
 
-### 4. Install the App on Your Repositories
+### 5. Install the App on Your Repositories
 
 1. Go to your GitHub App page → **Install App**
 2. Choose your account / organization
@@ -65,20 +133,20 @@ Automatically reviews every Pull Request using **Groq's llama3-70b-8192** model 
 
 ---
 
-### 5. Local Development
+### 6. Local Development
 
 ```bash
 # Clone and install dependencies
-git clone https://github.com/your-username/ai-review-github-app
+git clone https://github.com/Harsh2126/ai-review-github-app
 cd ai-review-github-app
-pip install -r requirements.txt
+npm install
 
 # Copy and fill in environment variables
 cp .env.example .env
 # Edit .env with your keys
 
 # Run the server
-python src/app.py
+node src/app.js
 
 # Expose locally with ngrok (for webhook testing)
 ngrok http 5000
@@ -89,7 +157,7 @@ ngrok http 5000
 
 ## 📊 Dashboard
 
-Visit `https://your-railway-url.railway.app/dashboard` to see:
+Visit `https://your-render-url.onrender.com/dashboard` to see:
 - Total PRs reviewed
 - Active installations
 - Recent review history with scores and severity badges
@@ -109,9 +177,9 @@ Every PR gets a comment like:
 The changes introduce a new authentication flow but lack input validation...
 
 ### 🐛 Issues Found
-| Type       | Description                        | Fix                          |
-|------------|------------------------------------|------------------------------|
-| 🔒 Security | SQL query uses string interpolation | Use parameterized queries    |
+| Type        | Description                         | Fix                        |
+|-------------|-------------------------------------|----------------------------|
+| 🔒 Security | SQL query uses string interpolation | Use parameterized queries  |
 
 ### ✅ Good Practices
 - Proper use of async/await
@@ -120,35 +188,3 @@ The changes introduce a new authentication flow but lack input validation...
 ### 🚨 Must Fix Before Merge
 - [ ] SQL injection vulnerability in login handler
 ```
-
----
-
-## 📁 Project Structure
-
-```
-ai-review-github-app/
-├── src/
-│   ├── app.py              # Flask routes
-│   ├── github_app.py       # GitHub App auth + API calls
-│   ├── reviewer.py         # Groq AI review logic
-│   ├── webhook_handler.py  # Webhook event processing
-│   └── database.py         # SQLite persistence
-├── dashboard/
-│   ├── index.html          # Dashboard UI
-│   ├── style.css
-│   └── app.js
-├── .env.example
-├── requirements.txt
-├── Procfile
-└── railway.json
-```
-
----
-
-## 🛠 Tech Stack
-
-- **Backend**: Python + Flask
-- **AI**: Groq API (`llama3-70b-8192`)
-- **GitHub Integration**: PyGithub + GitHub Apps JWT auth
-- **Database**: SQLite
-- **Deployment**: Railway
