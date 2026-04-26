@@ -1,5 +1,7 @@
 # 🤖 AI Code Reviewer — GitHub App
 
+🔗 **Live Demo**: [https://ai-review-github-app.onrender.com](https://ai-review-github-app.onrender.com)
+
 Automatically reviews every Pull Request using **Groq's llama-3.3-70b-versatile** model and posts a structured markdown comment with bugs, security issues, performance tips, and a score.
 
 ---
