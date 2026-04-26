@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const installationSchema = new mongoose.Schema({
   github_username: { type: String, required: true },
@@ -7,4 +7,4 @@ const installationSchema = new mongoose.Schema({
   is_active: { type: Number, default: 1 },
 });
 
-module.exports = mongoose.model("Installation", installationSchema);
+export default mongoose.model("Installation", installationSchema);

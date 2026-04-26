@@ -1,66 +1,168 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --border: #30363d;
-  --text: #e6edf3;
-  --muted: #8b949e;
-  --accent: #58a6ff;
-  --green: #3fb950;
-  --yellow: #d29922;
-  --red: #f85149;
+/* ===== RESET: Remove default browser margin/padding ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; min-height: 100vh; }
+/* ===== CSS VARIABLES: Color palette (GitHub dark theme) ===== */
+:root {
+  --bg: #0d1117;         /* Page background */
+  --surface: #161b22;    /* Card/header background */
+  --border: #30363d;     /* Border color */
+  --text: #e6edf3;       /* Primary text */
+  --muted: #8b949e;      /* Secondary/muted text */
+  --accent: #58a6ff;     /* Blue accent (links, scores) */
+  --green: #3fb950;      /* Low severity */
+  --yellow: #d29922;     /* Medium severity */
+  --red: #f85149;        /* High severity */
+}
 
+/* ===== BASE: Body styles ===== */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
+
+/* ===== HEADER: Top navigation bar ===== */
 header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 32px; border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
   background: var(--surface);
 }
-.logo { font-size: 1.2rem; font-weight: 700; }
 
+/* App logo/title */
+.logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* GitHub install button */
 .btn-install {
-  background: var(--accent); color: #0d1117; padding: 8px 18px;
-  border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-  transition: opacity .2s;
+  background: var(--accent);
+  color: #0d1117;
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
 }
-.btn-install:hover { opacity: .85; }
 
-main { max-width: 960px; margin: 40px auto; padding: 0 24px; }
+.btn-install:hover {
+  opacity: 0.85;
+}
 
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 40px; }
+/* ===== MAIN CONTENT: Centered container ===== */
+main {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
 
+/* ===== STATS GRID: Responsive stat cards row ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+/* Individual stat card */
 .stat-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: 28px 24px; display: flex;
-  flex-direction: column; align-items: center; gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
-.stat-value { font-size: 2.4rem; font-weight: 700; color: var(--accent); }
-.stat-label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
 
-.reviews-section h2 { font-size: 1.1rem; margin-bottom: 16px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+/* Large number value (e.g. "42") */
+.stat-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent);
+}
 
-.reviews-list { display: flex; flex-direction: column; gap: 12px; }
+/* Label below the number (e.g. "PRs Reviewed") */
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
+/* ===== REVIEWS SECTION: Section heading ===== */
+.reviews-section h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Reviews list container */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== REVIEW CARD: Individual PR review row ===== */
 .review-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: 18px 22px;
-  display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 1fr auto; /* Left: repo info | Right: score + badge */
+  align-items: start;
+  gap: 12px;
 }
-.review-repo { font-weight: 600; font-size: 0.95rem; }
-.review-meta { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
 
+/* Repo name (bold) */
+.review-repo {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Date/time below repo name */
+.review-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ===== SEVERITY BADGES ===== */
 .badge {
-  padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
   white-space: nowrap;
 }
-.badge-low    { background: rgba(63,185,80,.15);  color: var(--green); }
-.badge-medium { background: rgba(210,153,34,.15); color: var(--yellow); }
-.badge-high   { background: rgba(248,81,73,.15);  color: var(--red); }
 
-.score { font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 4px; text-align: right; }
+.badge-low    { background: rgba(63, 185, 80, 0.15);  color: var(--green); }
+.badge-medium { background: rgba(210, 153, 34, 0.15); color: var(--yellow); }
+.badge-high   { background: rgba(248, 81, 73, 0.15);  color: var(--red); }
 
+/* ===== SCORE: e.g. "7/10" ===== */
+.score {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+  text-align: right;
+}
+
+/* ===== STATES: Loading and empty messages ===== */
 .loading { color: var(--muted); text-align: center; padding: 40px; }
 .empty   { color: var(--muted); text-align: center; padding: 40px; }

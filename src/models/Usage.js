@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const usageSchema = new mongoose.Schema({
   installation_id: { type: Number, required: true },
@@ -8,4 +8,4 @@ const usageSchema = new mongoose.Schema({
 
 usageSchema.index({ installation_id: 1, month: 1 }, { unique: true });
 
-module.exports = mongoose.model("Usage", usageSchema);
+export default mongoose.model("Usage", usageSchema);

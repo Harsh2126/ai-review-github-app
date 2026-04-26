@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Code Reviewer — Dashboard</title>
   <link rel="stylesheet" href="/dashboard/style.css" />
 </head>
+
 <body>
+
+  <!-- ===== HEADER: Logo + Install Button ===== -->
   <header>
     <div class="logo">🤖 AI Code Reviewer</div>
-    <a id="install-btn" href="#" class="btn-install" target="_blank">Install on GitHub →</a>
+    <a id="install-btn" href="#" class="btn-install" target="_blank">
+      Install on GitHub →
+    </a>
   </header>
 
   <main>
+
+    <!-- ===== STATS SECTION: Total PRs + Active Installations ===== -->
     <section class="stats-grid">
+
+      <!-- Total PRs Reviewed -->
       <div class="stat-card">
         <span class="stat-value" id="total-reviews">—</span>
         <span class="stat-label">PRs Reviewed</span>
       </div>
+
+      <!-- Active GitHub App Installations -->
       <div class="stat-card">
         <span class="stat-value" id="active-installs">—</span>
         <span class="stat-label">Active Installations</span>
       </div>
+
     </section>
 
+    <!-- ===== REVIEWS SECTION: Recent PR Reviews List ===== -->
     <section class="reviews-section">
       <h2>Recent Reviews</h2>
+
+      <!-- Reviews are dynamically injected here by app.js -->
       <div id="reviews-list" class="reviews-list">
         <p class="loading">Loading reviews…</p>
       </div>
+
     </section>
+
   </main>
 
-  <script src="/dashboard/app.js"></script>
+  <!-- ===== SCRIPT: Entry point (ES module) ===== -->
+  <script type="module" src="/dashboard/js/main.js"></script>
+
 </body>
 </html>

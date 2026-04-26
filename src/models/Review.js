@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema({
   repo_name: { type: String, required: true },
@@ -9,4 +9,4 @@ const reviewSchema = new mongoose.Schema({
   created_at: { type: String, default: () => new Date().toISOString() },
 });
 
-module.exports = mongoose.model("Review", reviewSchema);
+export default mongoose.model("Review", reviewSchema);
