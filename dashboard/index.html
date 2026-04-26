@@ -4,101 +4,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Code Reviewer — Dashboard</title>
+  <title>CodeLens AI — Smart Code Reviews</title>
   <link rel="stylesheet" href="/dashboard/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 
 <body>
 
   <!-- ===== HEADER ===== -->
   <header>
-    <div class="logo">🤖 AI Code Reviewer</div>
+    <div class="logo">
+      <!-- SVG Logo -->
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="8" fill="#58a6ff" fill-opacity="0.15"/>
+        <path d="M10 12L6 16L10 20" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 12L26 16L22 20" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 9L14 23" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="23" cy="9" r="3" fill="#3fb950"/>
+        <circle cx="23" cy="9" r="1.5" fill="#0d1117"/>
+      </svg>
+      <span>CodeLens <span class="logo-ai">AI</span></span>
+    </div>
     <a id="install-btn" href="#" class="btn-install" target="_blank">
-      Install on GitHub →
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Install on GitHub
     </a>
   </header>
 
   <main>
 
-    <!-- ===== HERO: App description ===== -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
-      <h1>AI-Powered Code Reviews</h1>
-      <p>Automatically reviews every Pull Request using <strong>Groq's llama-3.3-70b-versatile</strong> model and posts a structured comment with bugs, security issues, performance tips, and a score.</p>
+      <div class="hero-badge">✦ Powered by Groq AI</div>
+      <h1>Smarter Code Reviews,<br/>Instantly on Every PR</h1>
+      <p>CodeLens AI automatically reviews every Pull Request using <strong>llama-3.3-70b-versatile</strong> — catching bugs, security issues, and performance problems before they ship.</p>
+      <a id="hero-install-btn" href="#" class="btn-hero" target="_blank">
+        Get Started Free →
+      </a>
     </section>
 
-    <!-- ===== STATS: Total PRs + Active Installations ===== -->
+    <!-- ===== STATS ===== -->
     <section class="stats-grid">
-
       <div class="stat-card">
-        <span class="stat-value" id="total-reviews">—</span>
-        <span class="stat-label">PRs Reviewed</span>
-      </div>
-
-      <div class="stat-card">
+        <div class="stat-icon">📦</div>
         <span class="stat-value" id="active-installs">—</span>
         <span class="stat-label">Active Installations</span>
       </div>
-
-    </section>
-
-    <!-- ===== WHY INSTALL ===== -->
-    <section class="section">
-      <h2>Why Install?</h2>
-      <div class="features-grid">
-
-        <div class="feature-card">
-          <span class="feature-icon">🐛</span>
-          <h3>Bug Detection</h3>
-          <p>Catches logical errors and bugs before they reach production.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🔒</span>
-          <h3>Security Scan</h3>
-          <p>Identifies security vulnerabilities like SQL injection, XSS, and more.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">⚡</span>
-          <h3>Performance Tips</h3>
-          <p>Suggests optimizations to make your code faster and efficient.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">✨</span>
-          <h3>Code Quality</h3>
-          <p>Enforces best practices and clean code standards automatically.</p>
-        </div>
-
+      <div class="stat-card">
+        <div class="stat-icon">🔍</div>
+        <span class="stat-value" id="total-reviews">—</span>
+        <span class="stat-label">PRs Reviewed</span>
       </div>
     </section>
 
-    <!-- ===== ABOUT ===== -->
+    <!-- ===== FEATURES ===== -->
     <section class="section">
-      <h2>About</h2>
-      <div class="about-card">
-        <p>AI Code Reviewer is a GitHub App that listens to Pull Request events and automatically posts a detailed review comment powered by <strong>Groq AI</strong>.</p>
-        <br />
-        <p>Every review includes a <strong>score out of 10</strong>, severity level, list of issues with fixes, good practices observed, and critical items that must be fixed before merging.</p>
-        <br />
-        <div class="tech-stack">
-          <span class="tech-badge">Node.js</span>
-          <span class="tech-badge">Express</span>
-          <span class="tech-badge">Groq AI</span>
-          <span class="tech-badge">MongoDB</span>
-          <span class="tech-badge">GitHub Apps</span>
+      <div class="section-label">Why CodeLens AI?</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrap bug">🐛</div>
+          <h3>Bug Detection</h3>
+          <p>Catches logical errors and bugs before they reach production.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap security">🔒</div>
+          <h3>Security Scan</h3>
+          <p>Identifies SQL injection, XSS, and other vulnerabilities instantly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap perf">⚡</div>
+          <h3>Performance Tips</h3>
+          <p>Suggests optimizations to make your code faster and efficient.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap quality">✨</div>
+          <h3>Code Quality</h3>
+          <p>Enforces best practices and clean code standards automatically.</p>
         </div>
       </div>
     </section>
 
     <!-- ===== HOW IT WORKS ===== -->
     <section class="section">
-      <h2>How It Works</h2>
+      <div class="section-label">How It Works</div>
       <div class="steps">
-        <div class="step"><span class="step-num">1</span><p>Install the app on your GitHub repository</p></div>
-        <div class="step"><span class="step-num">2</span><p>Open a Pull Request on any branch</p></div>
-        <div class="step"><span class="step-num">3</span><p>AI automatically reviews the code diff</p></div>
-        <div class="step"><span class="step-num">4</span><p>Review comment is posted on your PR instantly</p></div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Install the App</h4>
+            <p>Add CodeLens AI to your GitHub repository in one click.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Open a Pull Request</h4>
+            <p>Create a PR on any branch as you normally would.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>AI Reviews Your Code</h4>
+            <p>Groq AI analyzes the diff for bugs, security, and quality issues.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Get Instant Feedback</h4>
+            <p>A detailed review comment is posted on your PR with a score.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section">
+      <div class="section-label">About</div>
+      <div class="about-card">
+        <p>CodeLens AI is a GitHub App that listens to Pull Request events and automatically posts a detailed review powered by <strong>Groq AI</strong>. Every review includes a <strong>score out of 10</strong>, severity level, list of issues with suggested fixes, good practices observed, and critical items that must be resolved before merging.</p>
+        <div class="tech-stack">
+          <span class="tech-badge">Node.js</span>
+          <span class="tech-badge">Express</span>
+          <span class="tech-badge">Groq AI</span>
+          <span class="tech-badge">MongoDB</span>
+          <span class="tech-badge">GitHub Apps</span>
+          <span class="tech-badge">Render</span>
+        </div>
       </div>
     </section>
 
@@ -106,6 +140,10 @@
 
   <!-- ===== FOOTER ===== -->
   <footer>
+    <div class="footer-logo">
+      <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#58a6ff" fill-opacity="0.15"/><path d="M10 12L6 16L10 20" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12L26 16L22 20" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 9L14 23" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="9" r="3" fill="#3fb950"/><circle cx="23" cy="9" r="1.5" fill="#0d1117"/></svg>
+      <span>CodeLens AI</span>
+    </div>
     <p>Powered by <strong>Groq AI</strong> · Built with Node.js + MongoDB</p>
   </footer>
 

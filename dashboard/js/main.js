@@ -2,8 +2,10 @@ import { APP_NAME, REFRESH_INTERVAL } from "./config.js";
 import { fetchStats } from "./api.js";
 import { updateStats } from "./render.js";
 
-// ===== INIT: Set install button URL =====
+// ===== INIT: Set install button URLs =====
 document.getElementById("install-btn").href =
+  `https://github.com/apps/${APP_NAME}/installations/new`;
+document.getElementById("hero-install-btn").href =
   `https://github.com/apps/${APP_NAME}/installations/new`;
 
 // ===== LOAD DASHBOARD: Fetch stats and update UI =====
