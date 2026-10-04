@@ -1,5 +1,86 @@
 # 🤖 AI Code Reviewer — GitHub App
 
+## 🚀 How to Use
+
+### Step 1: Open the Live Demo
+
+Visit the live application:
+
+👉 **[AI Code Reviewer — Live Demo](https://ai-review-github-app.onrender.com)*
+### Step 2: Install the GitHub App
+
+On the live demo page, click on:
+
+**"Install on GitHub"**
+
+You will be redirected to GitHub to install the AI Code Reviewer App.
+
+---
+
+### Step 3: Select Your Repository
+
+GitHub will ask where you want to install the app.
+
+You can choose:
+
+- **All repositories**, or
+- **Only select repositories**
+
+Select the repository where you want to use the AI Code Reviewer.
+
+Then click **Install**.
+
+---
+
+### Step 4: Create a Pull Request
+
+After installing the app:
+
+1. Open the selected GitHub repository.
+2. Create a new branch.
+3. Make some code changes.
+4. Push your changes.
+5. Create a Pull Request.
+
+---
+
+### Step 5: AI Automatically Reviews Your Code
+
+Once the Pull Request is created or updated, the AI Code Reviewer automatically starts the review.
+
+It:
+
+- 🔍 Analyzes the changed code
+- 🐛 Finds potential bugs
+- 🔐 Identifies security issues
+- ⚡ Suggests performance improvements
+- 📊 Generates a code quality score
+
+---
+
+### Step 6: View the Review
+
+After the analysis is completed, the AI-generated review is automatically posted as a comment on your Pull Request.
+
+Example:
+
+```text
+🤖 AI Code Review
+
+Score: 8/10
+
+🐛 Bugs
+Potential issues found...
+
+🔐 Security
+Security concerns...
+
+⚡ Performance
+Optimization suggestions...
+
+✅ Positives
+Good practices detected...
+
 🔗 **Live Demo**: [https://ai-review-github-app.onrender.com](https://ai-review-github-app.onrender.com)
 
 Automatically reviews every Pull Request using **Groq's llama-3.3-70b-versatile** model and posts a structured markdown comment with bugs, security issues, performance tips, and a score.
