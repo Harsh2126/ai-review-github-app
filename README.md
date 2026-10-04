@@ -6,86 +6,28 @@
 
 Visit the live application:
 
-👉 **[AI Code Reviewer — Live Demo](https://ai-review-github-app.onrender.com)*
+👉 **[AI Code Reviewer — Live Demo](https://ai-review-github-app.onrender.com)**
+
 ### Step 2: Install the GitHub App
 
-On the live demo page, click on:
+Click **"Install on GitHub"** on the live demo page and select the GitHub account or organization where you want to install the app.
 
-**"Install on GitHub"**
+### Step 3: Select a Repository
 
-You will be redirected to GitHub to install the AI Code Reviewer App.
-
----
-
-### Step 3: Select Your Repository
-
-GitHub will ask where you want to install the app.
-
-You can choose:
-
-- **All repositories**, or
-- **Only select repositories**
-
-Select the repository where you want to use the AI Code Reviewer.
-
-Then click **Install**.
-
----
+Choose **All repositories** or **Only select repositories**, then click **Install**.
 
 ### Step 4: Create a Pull Request
 
-After installing the app:
+Create or update a Pull Request in the selected repository. The AI Code Reviewer will automatically analyze the changed code.
 
-1. Open the selected GitHub repository.
-2. Create a new branch.
-3. Make some code changes.
-4. Push your changes.
-5. Create a Pull Request.
+### Step 5: View the AI Review
 
----
+The review is automatically posted as a comment on the Pull Request with:
 
-### Step 5: AI Automatically Reviews Your Code
-
-Once the Pull Request is created or updated, the AI Code Reviewer automatically starts the review.
-
-It:
-
-- 🔍 Analyzes the changed code
-- 🐛 Finds potential bugs
-- 🔐 Identifies security issues
-- ⚡ Suggests performance improvements
-- 📊 Generates a code quality score
-
----
-
-### Step 6: View the Review
-
-After the analysis is completed, the AI-generated review is automatically posted as a comment on your Pull Request.
-
-Example:
-
-```text
-🤖 AI Code Review
-
-Score: 8/10
-
-🐛 Bugs
-Potential issues found...
-
-🔐 Security
-Security concerns...
-
-⚡ Performance
-Optimization suggestions...
-
-✅ Positives
-Good practices detected...
-
-🔗 **Live Demo**: [https://ai-review-github-app.onrender.com](https://ai-review-github-app.onrender.com)
-
-Automatically reviews every Pull Request using **Groq's llama-3.3-70b-versatile** model and posts a structured markdown comment with bugs, security issues, performance tips, and a score.
-
----
+- 🐛 Bugs
+- 🔐 Security issues
+- ⚡ Performance suggestions
+- 📊 Code quality score
 
 ## 🛠 Tech Stack
 
@@ -99,7 +41,7 @@ Automatically reviews every Pull Request using **Groq's llama-3.3-70b-versatile*
 
 ## 📁 Project Structure
 
-```
+```text
 ai-review-github-app/
 ├── src/
 │   ├── config/
@@ -140,6 +82,7 @@ ai-review-github-app/
 ## 🚀 Quick Start
 
 ### 1. Get a Groq API Key
+
 1. Go to [console.groq.com](https://console.groq.com)
 2. Sign up / log in → **API Keys** → **Create API Key**
 3. Copy the key (starts with `gsk_`)
@@ -171,7 +114,8 @@ ai-review-github-app/
 3. **Database Access** → Add a user with password
 4. **Network Access** → Allow access from anywhere (`0.0.0.0/0`)
 5. **Connect** → Copy the connection string:
-```
+
+```text
 mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/ai-reviewer
 ```
 
@@ -199,11 +143,12 @@ mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/ai-reviewer
 | `PORT` | `5000` |
 
 > **Tip for private key**: Run this to get single-line format:
+>
 > ```bash
 > python -c "print(open('private-key.pem').read().replace('\n', '\\n'))"
 > ```
 
-6. Deploy — copy the public URL and update your GitHub App's **Webhook URL**
+6. Deploy — copy the public URL and update your GitHub App's **Webhook URL**.
 
 ---
 
@@ -241,6 +186,7 @@ ngrok http 5000
 ## 📊 Dashboard
 
 Visit `https://your-render-url.onrender.com/dashboard` to see:
+
 - Total PRs reviewed
 - Active installations
 - Recent review history with scores and severity badges
@@ -251,7 +197,7 @@ Visit `https://your-render-url.onrender.com/dashboard` to see:
 
 Every PR gets a comment like:
 
-```
+```text
 ## 🤖 AI Code Review
 
 **Score: 7/10** | 🟡 Medium Priority
