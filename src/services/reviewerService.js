@@ -1,8 +1,10 @@
-import Groq from "groq-sdk";
+import { GoogleGenAI } from "@google/genai";
+
+const MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
 class ReviewerService {
   constructor() {
-    this.client = new Groq({ apiKey: process.env.GROQ_API_KEY });
+    this.client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   }
 
   async review(diff) {
@@ -26,13 +28,18 @@ Return this exact JSON structure (no markdown, no extra text):
 }`;
 
     try {
-      const res = await this.client.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 1000,
-        temperature: 0.3,
+      const res = await this.client.models.generateContent({
+        model: MODEL,
+        contents: prompt,
+        config: {
+          maxOutputTokens: 2048,
+          temperature: 0.3,
+          responseMimeType: "application/json",
+          thinkingConfig: { thinkingBudget: 0 },
+        },
       });
-      let raw = res.choices[0].message.content.trim();
+
+      let raw = (res.text || "").trim();
       if (raw.startsWith("```")) {
         raw = raw.split("```")[1];
         if (raw.startsWith("json")) raw = raw.slice(4);
@@ -74,7 +81,7 @@ ${positives}
 ${mustFix}
 
 ---
-*Powered by AI Code Reviewer · llama-3.3-70b-versatile*
+*Powered by AI Code Reviewer · ${MODEL}*
 ---`;
   }
 
