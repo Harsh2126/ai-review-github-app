@@ -7,8 +7,10 @@ const verifySignature = (req, res, next) => {
   if (!secret) return next();
   if (!signature) return res.status(401).json({ error: "Missing signature" });
 
-  const body = Buffer.isBuffer(req.body) ? req.body : Buffer.from(JSON.stringify(req.body));
-  const mac = `sha256=${crypto.createHmac("sha256", secret).update(body).digest("hex")}`;
+  const rawBody = Buffer.isBuffer(req.body) ? req.body : Buffer.from(req.body);
+  const mac = `sha256=${crypto.createHmac("sha256", secret).update(rawBody).digest("hex")}`;
+
+  if (mac.length !== signature.length) return res.status(401).json({ error: "Invalid signature" });
 
   try {
     if (!crypto.timingSafeEqual(Buffer.from(mac), Buffer.from(signature))) {
