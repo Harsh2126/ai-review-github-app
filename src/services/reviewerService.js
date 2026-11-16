@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-2.0-flash-lite";
+const MODEL = process.env.GEMINI_MODEL || "gemini-3.8-flash";
 
 class ReviewerService {
   constructor() {
